@@ -6,7 +6,7 @@ const swaggerDocument = require('./docs/swaggers.json');
 
 
 app.get('/cars', (req, res) => {
-    res.send('Audi a5, BMW 3, Mercedes c' ); 
+    res.send('Audi a5, BMW 3, Mercedes C' ); 
 });
 
 app.get('/post', (req, res) => {

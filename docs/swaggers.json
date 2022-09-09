@@ -9,7 +9,7 @@
         "/cars": {
             "get": {
                 "tags": [
-                    "cars"
+                    "List"
                 ],
                 "responses": {
                     "200": {
@@ -18,23 +18,104 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "type": "string"
+                                        "$ref": "#/components/schemas/CarDetails"
                                     }
-                                },
-                                "examples": {
-                                    "List of car ads": {
-                                        "value": [
-                                            "Audi a5",
-                                            "BMW 3",
-                                            "Mercedes c"
-                                        ]
+                                }
+                            },
+                            "text/xml": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CarDetails"
                                     }
+                                }
+                            }
+                        },
+                        "description": "all good"
+                    }
+                },
+                "description": "Returns a list of car ads\n"
+            },
+            "post": {
+                "requestBody": {},
+                "tags": [
+                    "Post"
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CarDetails"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Post car ads\n\n"
+                    }
+                },
+                "summary": "Car ad post",
+                "description": "Post Your Car Ad"
+            }
+        },
+        "/cars/posts": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CarDetails"
                                 }
                             }
                         }
                     }
+                }
+            },
+            "put": {
+                "responses": {
+                    "204": {}
+                }
+            },
+            "delete": {
+                "responses": {
+                    "204": {}
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CarDetails": {
+                "title": "Root Type for CarDetails",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "car": {
+                        "type": "string"
+                    },
+                    "Price": {
+                        "type": "string"
+                    },
+                    "Seller": {
+                        "type": "string"
+                    },
+                    "Owner": {
+                        "type": "string"
+                    },
+                    "Location": {
+                        "type": "string"
+                    }
                 },
-                "description": "Returns a list of car ads\n"
+                "example": {
+                    "car": "audi",
+                    "Price": "123",
+                    "Seller": "Ramon Ernits",
+                    "Owner": "Ernits Ramon",
+                    "Location": "Tallinn"
+                }
             }
         }
     }

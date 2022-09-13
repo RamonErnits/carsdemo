@@ -1,17 +1,28 @@
 const app = require('express')();
-const port = 8080;
+const port = 3000;
+
+const cars = [
+    {id: 1, make: 'Ford', model: 'Fusion Hybrid', year: 2019},
+    {id: 2, make: 'Tesla', model: 'Model S', year: 2019},
+    {id: 3, make: 'Toyota', model: 'Prius', year: 2019}
+];
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./docs/swaggers.json');
 
+const yamljs = require('yamljs');
+const swaggerDocumentYaml = yamljs.load('./docs/swagger.yaml');
 
-app.get('/cars', (req, res) => {
-    res.send('Audi a5, BMW 3, Mercedes C' ); 
+//Saame autod id kaudu
+app.get('/cars/:id', (req, res) => {
+    const car = cars.find(c => c.id === parseInt(req.params.id));
+    if (!car) res.status(404).send('The car with the given ID was not found.');
+    res.send(car);
 });
 
-app.get('/post', (req, res) => {
-    res.send('Post 1, Post 2, Post 3' );
-    });
+app.get('/cars', (req, res) => {
+    res.send(cars); 
+});
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

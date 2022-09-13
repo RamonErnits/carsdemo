@@ -84,6 +84,61 @@
                     "204": {}
                 }
             }
+        },
+        "/cars/{id}": {
+            "get": {
+                "tags": [
+                    "details"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "examples": {
+                                    "Full details of given car ads": {
+                                        "value": "    {id: 1, make: 'Ford', model: 'Fusion Hybrid', year: 2019},\r\n    {id: 2, make: 'Tesla', model: 'Model S', year: 2019},\r\n    {id: 3, make: 'Toyota', model: 'Prius', year: 2019}"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "description\n"
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Car \\\\w+ was not found": {
+                                        "value": "Car \\\\w+ was not found in car array"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "description"
+                    }
+                },
+                "summary": "Get full details of car ads",
+                "description": "Returns full details of a given id car\n"
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "description": "",
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
         }
     },
     "components": {
@@ -115,6 +170,19 @@
                     "Seller": "Ramon Ernits",
                     "Owner": "Ernits Ramon",
                     "Location": "Tallinn"
+                }
+            },
+            "error": {
+                "title": "Root Type for error",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "error": "Error Message."
                 }
             }
         }

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const CarAd = mongoose.model('cars');
 
-
+//get all car ads
 exports.getAll = function(req, res) {
     cars.find({},(err, car) => {
         if (err) {

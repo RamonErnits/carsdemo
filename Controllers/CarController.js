@@ -11,6 +11,7 @@ exports.getAll = function(req, res) {
     });
 };
 
+// create new add
 exports.createNew = function(req, res) {
     const newCar = new cars(req.body);
     newCar.save((err, car) => {

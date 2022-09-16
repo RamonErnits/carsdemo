@@ -3,7 +3,7 @@ const CarAd = mongoose.model('cars');
 
 
 exports.getAll = function(req, res) {
-    cars.find({}, function(err, car) {
+    cars.find({},(err, car) => {
         if (err) {
             res.send(err);
         }
@@ -13,10 +13,10 @@ exports.getAll = function(req, res) {
 
 exports.createNew = function(req, res) {
     const newCar = new cars(req.body);
-    newCar.save(function(err, car) {
+    newCar.save((err, car) => {
         if (err) {
             res.status(400).send(err);
-        }else{
+        } else{
             res.status(201).json(car);
         }
     });

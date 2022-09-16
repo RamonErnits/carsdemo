@@ -69,7 +69,7 @@ paths:
                                     type: string
                             examples:
                                 Full details of given car ads:
-                                    value: "    {id: 1, make: 'Ford', model: 'Fusion Hybrid', year: 2019},\r\n    {id: 2, make: 'Tesla', model: 'Model S', year: 2019},\r\n    {id: 3, make: 'Toyota', model: 'Prius', year: 2019}"
+                                    value: "    {id: 1, brand: 'Ford', model: 'Fusion Hybrid', year: 2019},\r\n    {id: 2, brand: 'Tesla', model: 'Model S', year: 2019},\r\n    {id: 3, brand: 'Toyota', model: 'Prius', year: 2019}"
                     description: |
                         description
                 '404':

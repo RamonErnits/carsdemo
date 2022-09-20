@@ -24,13 +24,35 @@ exports.createNew = function(req, res) {
 };
 
 exports.getById = function(req, res) {
-    
+    // get car by id
+    cars.findById(req.params.carId, (err, car) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(car);
+    });
 };
 
 exports.editById = function(req, res) {
+    // edit car by id
+    cars.findOneAndUpdate({_id: req.params.carId}, req.body, {new: true}, (err, car) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(car);
+    });
     
 };
 
 exports.deleteById = function(req, res) {
-    
+    // delete car by id
+    cars.remove({
+        _id: req.params.carId
+    }, (err, car) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json({ message: 'Car deleted successfully' });
+    });
+
 };

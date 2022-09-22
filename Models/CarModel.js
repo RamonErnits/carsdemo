@@ -14,7 +14,24 @@ const CarSchema = new Schema({
     year: {
         type: Number,
         required: "Car year is required"
+    },
+    owner : {
+        type: String,
+        required: "Car owner is required"
+    },
+    seller : {
+        type: String,
+        required: "Car seller is required"
+    },
+    price : {
+        type: Number,
+        required: "Car price is required"
+    },
+    location : {
+        type: String,
+        required: "Car location is required"
     }
 });
+
 
 module.exports = mongoose.model('cars', CarSchema);

@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-const CarAd = mongoose.model('cars');
+const car = mongoose.model('cars');
 
 //get all car ads
 exports.getAll = function(req, res) {
-    cars.find({},(err, car) => {
+    car.find({},(err, car) => {
         if (err) {
             res.send(err);
         }
@@ -13,7 +13,7 @@ exports.getAll = function(req, res) {
 
 // create new add
 exports.createNew = function(req, res) {
-    const newCar = new cars(req.body);
+    const newCar = new car(req.body);
     newCar.save((err, car) => {
         if (err) {
             res.status(400).send(err);
@@ -25,7 +25,7 @@ exports.createNew = function(req, res) {
 
 exports.getById = function(req, res) {
     // get car by id
-    cars.findById(req.params.carId, (err, car) => {
+    car.findById(req.params.carId, (err, car) => {
         if (err) {
             res.send(err);
         }
@@ -35,18 +35,22 @@ exports.getById = function(req, res) {
 
 exports.editById = function(req, res) {
     // edit car by id
-    cars.findOneAndUpdate({_id: req.params.carId}, req.body, {new: true}, (err, car) => {
+    car.updateOne({_id: req.params.carId},{$set: req.body}, null, (err, car) => {
         if (err) {
             res.send(err);
+        } else{
+            console.log(car);
+            res.status(200).json(car);
         }
-        res.json(car);
+        
     });
+
     
 };
 
 exports.deleteById = function(req, res) {
     // delete car by id
-    cars.remove({
+    car.remove({
         _id: req.params.carId
     }, (err, car) => {
         if (err) {

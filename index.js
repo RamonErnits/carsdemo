@@ -1,3 +1,7 @@
+
+
+
+
 const express = require('express');
 const app = express();
 const carmodel = require('./Models/CarModel');
@@ -61,7 +65,28 @@ app.post('/car', (req, res) => {
 });
 */
 
+// make seeding data
+app.get('/seed', (req, res) => {
+    const car = [
+        {brand: 'Ford', model: 'Fusion Hybrid', year: 2019, owner: 'John', seller: 'John', price: 10000, location: 'Tallinn'},
+        {brand: 'Tesla', model: 'Model S', year: 2019, owner: 'John', seller: 'John', price: 10000, location: 'Tallinn'},
+        {brand: 'Toyota', model: 'Prius', year: 2019, owner: 'John', seller: 'John', price: 10000, location: 'Tallinn'},
+        {brand: 'Honda', model: 'Civic', year: 2019, owner: 'John', seller: 'John', price: 10000, location: 'Tallinn'},
+    ];
+
+    carmodel.insertMany(car, (err, docs) => {
+        if(err){
+            res.status(400).send(err);
+        } else{
+            res.status(201).send(docs);
+        }
+    });
+});
+
+
+
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app .use('/docsYaml', swaggerUi.serve, swaggerUi.setup(swaggerDocumentYaml));
 
 app.listen(port, () => {
     console.log(`API up at http://localhost:${port}`)

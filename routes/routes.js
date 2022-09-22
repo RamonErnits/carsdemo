@@ -1,12 +1,13 @@
-const carsList = require('../Controllers/MockCarsController');
+const car = require('../Controllers/CarController');
 
 module.exports = function(app) {
     app.route('/cars')
-        .get(carsList.getAll)
-        .post(carsList.createNew);         //Create
+        .get(car.getAll)
+        .post(car.createNew);         //Create
 
     app.route('/cars/:id')
-        .get(carsList.getById)            //Read
-        .put(carsList.editById)            //Update
-        .delete(carsList.deleteById);      //Delete
+        .get(car.getById)            //Read
+        .put(car.editById)            //Update
+        .delete(car.deleteById);      //Delete
+
 }

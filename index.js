@@ -1,28 +1,80 @@
-
-
-
-
-const express = require('express');
-const app = express();
-const carmodel = require('./Models/CarModel');
+const { faker } = require("@faker-js/faker");
+const app = require("express")();
 const port = 3000;
-
-
-app.use(express.json());
-
-
-
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./docs/swaggers.json');
-
 const yamljs = require('yamljs');
-const { default: mongoose } = require('mongoose');
-const swaggerDocumentYaml = yamljs.load('./docs/swagger.yaml');
+const swaggerDocument = require('./docs/swaggers.json');
+const mongoose = require("mongoose");
+const carmodel = require('./Models/CarModel');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/CarAdsApiDb');
+mongoose.connect("mongodb://localhost:27017/carsApiDb")
+
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.json())
+
+app.use(function(req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 require("./routes/routes")(app);
+
+
+const MongoClient = require('mongodb').MongoClient;
+
+function randomIntFromInterval(min,max) {
+    return Math.floor(Math.random()*(max-min+1)+min);
+}
+
+async function seedDB() {
+    // Connection URL
+    const uri = "mongodb://localhost:27017/carsApiDb";
+
+    const client = new MongoClient(uri, {
+        useNewUrlParser: true,
+        // useUnifiedTopology: true,
+    });
+
+    try {
+        await client.connect();
+        console.log("Connected correctly to server");
+
+        const collection = client.db("carsApiDb").collection("cars");
+
+        // The drop() command destroys all data from a collection.
+        // Make sure you run it against proper database and collection.
+        collection.drop();
+
+        // make a bunch of time series data
+        let timeSeriesData = [];
+
+        for (let i = 0; i < 5000; i++) {
+            const brand = faker.car.brand();
+            const seller = faker.name.seller();
+            const price = faker.finance.price(5,20,0);
+            let car = {
+              
+                    brand: brand,
+                    seller,
+                    price,
+           
+            };
+
+            
+            timeSeriesData.push(car);
+        }
+        collection.insertMany(timeSeriesData);
+
+        console.log("Database seeded! :)");
+        
+    } catch (err) {
+        console.log(err.stack);
+    }
+}
+
+seedDB();
 
 /*
 const cars = [

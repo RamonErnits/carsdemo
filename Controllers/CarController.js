@@ -25,7 +25,8 @@ exports.createNew = function(req, res) {
 
 exports.getById = function(req, res) {
     // get car by id
-    car.findById(req.params.carId, (err, car) => {
+    car.findById(req.params.carId
+        , (err, car) => {
         if (err) {
             res.send(err);
         }
@@ -50,7 +51,7 @@ exports.editById = function(req, res) {
 
 exports.deleteById = function(req, res) {
     // delete car by id
-    car.remove({
+    car.deleteOne({
         _id: req.params.carId
     }, (err, car) => {
         if (err) {

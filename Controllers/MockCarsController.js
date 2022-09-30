@@ -1,6 +1,6 @@
 //import {faker} from '@faker-js/faker';
 const { faker } = require('@faker-js/faker');
-const { modelNames } = require('mongoose');
+
 
 const car = [
     {id: 1, brand: 'Ford', model: 'Fusion Hybrid', year: 2019, price: 30000, owner: 'John Doe', seller: 'Jane Doe', location: 'New York'},

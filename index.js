@@ -6,6 +6,7 @@ const yamljs = require('yamljs');
 const swaggerDocument = require('./docs/swaggers.json');
 const mongoose = require("mongoose");
 const carmodel = require('./Models/CarModel');
+const bodyParser = require("body-parser");
 
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost:27017/carsApiDb")
@@ -13,7 +14,7 @@ mongoose.connect("mongodb://localhost:27017/carsApiDb")
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
 
-app.use(function(req, res) {
+app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
@@ -51,9 +52,9 @@ async function seedDB() {
         let timeSeriesData = [];
 
         for (let i = 0; i < 5000; i++) {
-            const brand = faker.car.brand();
-            const seller = faker.name.seller();
-            const price = faker.finance.price(5,20,0);
+            const brand = faker.vehicle.manufacturer();
+            const price = faker.finance.amount(25, 100, 2, '$');
+            const seller = faker.name.fullName();
             let car = {
               
                     brand: brand,
@@ -138,7 +139,7 @@ app.get('/seed', (req, res) => {
 
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app .use('/docsYaml', swaggerUi.serve, swaggerUi.setup(swaggerDocumentYaml));
+
 
 app.listen(port, () => {
     console.log(`API up at http://localhost:${port}`)

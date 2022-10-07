@@ -10,4 +10,9 @@ module.exports = function(app) {
         .put(car.editById)            //Update
         .delete(car.deleteById);      //Delete
 
+    app.route('/signup', (req, res) => {
+        res.render('signup');
+    });
+    app.route('/login')
+
 }

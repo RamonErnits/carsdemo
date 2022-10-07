@@ -3,7 +3,7 @@ const app = require("express")();
 const port = 3000;
 const swaggerUi = require('swagger-ui-express');
 const yamljs = require('yamljs');
-const swaggerDocument = require('./docs/swaggers.json');
+const swaggerDocument = yamljs.load('./docs/swagger.yaml');
 const mongoose = require("mongoose");
 const carmodel = require('./Models/CarModel');
 const bodyParser = require("body-parser");
@@ -52,15 +52,20 @@ async function seedDB() {
         let timeSeriesData = [];
 
         for (let i = 0; i < 5000; i++) {
-            const brand = faker.vehicle.manufacturer();
-            const price = faker.finance.amount(25, 100, 2, '$');
+            const brand = faker.vehicle.vehicle();
+            const price = faker.finance.amount(25, 100, 2,);
             const seller = faker.name.fullName();
+            const location = faker.address.country();
+            const year = randomIntFromInterval(1990, 2020);
+            const color = faker.vehicle.color();
             let car = {
               
                     brand: brand,
-                    seller,
                     price,
-           
+                    seller,
+                    location,
+                    year,
+                    color,
             };
 
             

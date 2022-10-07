@@ -16,15 +16,15 @@ const car = [
 ];
 
 for (let i = 0; i < 20; i++) {
-    const randomName = faker.vehicle.manufacturer();
+    const randomName = faker.vehicle.vehicle();
     const price = faker.finance.amount(25, 100, 2, '$');
     const seller = faker.name.fullName();
-    const location = faker.address.country();
-    console.log(randomName, price, "k","\n", "Seller:", seller, "\n", "Location:", location, "\n");
+    const location = faker.address.cityName();
+    const year = randomIntFromInterval(1990, 2020);
+    const color = faker.vehicle.color();
+    console.log(randomName, price, "k","\n", "Seller:", seller, "\n", "Location:", location, "\n", "Year:", year, "\n", "Color:", color, "\n");
 }
 
-
-// Language: javascript
 
 exports.getAll = function(req, res) {
     res.send(car);

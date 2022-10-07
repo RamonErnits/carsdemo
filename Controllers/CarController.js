@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const CarDTO = require('../Models/CarsDTO');
 const car = mongoose.model('cars');
 
 //get all car ads
@@ -6,7 +7,7 @@ exports.getAll = function(req, res) {
     car.find({},(err, car) => {
         if (err) {
             res.send(err);
-        }
+        } 
         res.json(car);
     });
 };
@@ -24,14 +25,19 @@ exports.createNew = function(req, res) {
 };
 
 exports.getById = function(req, res) {
-    // get car by id
-    car.findById(req.params.carId
-        , (err, car) => {
+
+    if (!(parseInt(req.params.id) > 0)) {
+        res.status(400).send({ error: "ID must be a positive integer" })
+        return
+    }
+    car.findOne({_id:(req.params.id)},(err,car)=>{
         if (err) {
-            res.send(err);
+            res.status(400).send(err)
+        } else {
+            res.status(200).json(new CarDTO(car))
         }
-        res.json(car);
-    });
+    })      
+    return
 };
 
 exports.editById = function(req, res) {

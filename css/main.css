@@ -1,47 +1,109 @@
 * {
-    margin:0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: rgb(95, 81, 160);
-    color: white
-  }
-  .header {
-    background-color: red;
-  }
-  .btn-text {
-      font-size: 2rem;
-      color: white;
-      display: inline-block;
-      text-decoration: none;
-      border-bottom: 0.2rem solid white;
-      margin-top: 1.5rem;
-      margin-bottom: 1rem;
-      padding: 1rem;
-      transition: all 0.3s;
-      margin-right: 2rem;
-      background-color: rgb(73, 65, 65);
-  }
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #bc986a;
+  color: black
+}
+
+.carsShow {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 800px;
+}
+
+.modal-content{
+  margin: 50px; 
+}
+
+.modal-body{
+  background-color: rgba(82,82,82,255);
+}
+
+.info{
+  width: 20%;
+  margin: 0 auto;
+}
+
+.navbar{
+  background-color: #bc986a;
+  overflow: hidden;
   
-  .ticketsShow{
-    margin-left: 54rem;
+}
+
+a{
+  background-color: #bc986a;
+}
+
+.navbar a{
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 10px 10px;
+  text-decoration: none;
+  font-size: 17px;
+  align-items: center;
+
+}
+
+.navbar a:hover{
+  background: #fbeec1;
+  border-radius: 50%;
+  color: black;
+}
+
+th,
+td {
+  padding: 7px;
+  background-color: rgba(255,255,255,0.2);
+  color: black;
+}
+
+th {
+  text-align: left;
+}
+
+thead >th {
+    background-color: wheat;
+}
+
+.modal-footer{
+  background-color: red(39, 39, 39);
+  margin: 0 auto;
+}
+
+.btn {
+  background-color: rgb(39, 39, 39);
+  margin-left :80%;
+  margin-top: 7px;
+}
+
+
+tbody >tr:hover{
+      background-color: #fbeec1;
+      color: black;
   }
-  
-  
-  .ticketname{
-    margin-left: 50rem;
-    color: rgb(83, 172, 150);
-  }
-  
-  .btn-text:hover{
-    color: white;
-      background-color: rgb(233, 46, 46);
-      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
-      transform: translateY(-5px);
-  }
-  
-  
-  .btn-text:active{
-    color: white;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    transform: translateY(5px);
-  }
+
+tbody>td:hover:before{
+  position: relative;
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -9999px;
+      bottom: -9999px;
+      background-color: rgba(0, 0, 0, 0.2);
+      z-index: -1;
+    
+}
+
+
+table {
+
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(172, 172, 172, 0.1);
+  margin-left: -15px;
+}
+

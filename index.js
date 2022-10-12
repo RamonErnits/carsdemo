@@ -13,6 +13,8 @@ const JWT_SECRET = process.env.JWT_SECRET
 const carmodel = require('./Models/CarModel');
 const bodyParser = require("body-parser");
 
+
+
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost:27017/carsApiDb")
 
@@ -87,6 +89,9 @@ async function seedDB() {
 
 seedDB();
 
+// set up engine
+
+app.set('view engine', 'ejs');
 
 
 app.post("/login", async (req, res, next) => {
@@ -166,7 +171,7 @@ app.post("/login", async (req, res, next) => {
     });
   });
   
-  
+
   app.get('/accessResource', (req, res)=>{  
       
       const token2 = req.headers.authorization

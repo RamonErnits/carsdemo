@@ -1,4 +1,6 @@
 const car = require('../Controllers/CarController');
+const mainController = require("../controllers/mainController");
+const User = require('../Models/userModel');
 
 module.exports = function(app) {
     app.route('/cars')
@@ -10,6 +12,14 @@ module.exports = function(app) {
         .put(car.editById)            //Update
         .delete(car.deleteById);      //Delete
 
+
+    app.route('/register')
+    .get(mainController.getRegisterPage)
+    .post(mainController.postRegister);
+ 
+    app.route('/login')
+    .get(mainController.getLoginPage)
+    .post(mainController.postLogin);
 
 
 }
